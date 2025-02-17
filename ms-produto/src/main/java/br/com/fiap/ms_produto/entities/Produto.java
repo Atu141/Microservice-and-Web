@@ -1,9 +1,16 @@
 package br.com.fiap.ms_produto.entities;
 
+import jakarta.persistence.*;
+
 import java.util.Objects;
 
+
+@Entity
+@Table(name= "tb_produto")
 public class Produto {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private String descricao;

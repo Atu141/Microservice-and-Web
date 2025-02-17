@@ -1,5 +1,7 @@
 package br.com.fiap.ms_produto.dto;
 
+import br.com.fiap.ms_produto.entities.Produto;
+
 public record ProdutoResponseDTO(
         Long id,
         String nome,
@@ -7,8 +9,12 @@ public record ProdutoResponseDTO(
         Double valor
 ) {
 
-
-    public static ProdutoResponseDTO createMock(){
-        return new ProdutoResponseDTO(1l, "Smart TV", "Smart TV LG LED 29 Polegadas", 2990.0);
+    public ProdutoResponseDTO(Produto entity){
+        this(entity.getId(),
+            entity.getNome(),
+            entity.getDescricao(),
+            entity.getValor());
     }
+
+
 }
