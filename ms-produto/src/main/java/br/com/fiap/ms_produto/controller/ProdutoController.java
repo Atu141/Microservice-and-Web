@@ -3,6 +3,7 @@ package br.com.fiap.ms_produto.controller;
 import br.com.fiap.ms_produto.dto.ProdutoRequestDTO;
 import br.com.fiap.ms_produto.dto.ProdutoResponseDTO;
 import br.com.fiap.ms_produto.service.ProdutoService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +35,7 @@ import java.util.List;
     }
 
     @PostMapping
-    public ResponseEntity<ProdutoResponseDTO> insert(@RequestBody ProdutoRequestDTO requestDTO){
+    public ResponseEntity<ProdutoResponseDTO> insert(@Valid @RequestBody ProdutoRequestDTO requestDTO){
         ProdutoResponseDTO dto = service.insert(requestDTO);
 
         URI uri = ServletUriComponentsBuilder
@@ -47,7 +48,7 @@ import java.util.List;
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProdutoResponseDTO>update(@PathVariable long id,@RequestBody ProdutoRequestDTO requestDTO){
+    public ResponseEntity<ProdutoResponseDTO>update(@PathVariable long id,@Valid @RequestBody ProdutoRequestDTO requestDTO){
         ProdutoResponseDTO dto = service.update(id, requestDTO);
 
         return ResponseEntity.ok(dto);

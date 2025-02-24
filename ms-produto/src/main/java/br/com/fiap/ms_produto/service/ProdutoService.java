@@ -26,7 +26,7 @@ public class ProdutoService {
     @Transactional(readOnly = true)
     public ProdutoResponseDTO findById(long id){
         Produto entity = repository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("Recurso não encontrado. Id" + id)
+                () -> new ResurceNotFundException("Recurso não encontrado. Id" + id)
         );
 
         return new ProdutoResponseDTO(entity);
@@ -54,14 +54,14 @@ public class ProdutoService {
             entity = repository.save(entity);
             return new ProdutoResponseDTO(entity);
         }catch (EntityNotFoundException ex){
-            throw new EntityNotFoundException("Recusso não encontrado. Id: "+ id);
+            throw new ResurceNotFundException("Recusso não encontrado. Id: "+ id);
         }
     }
 
     @Transactional
     public void delete(long id){
         if (!repository.existsById(id)){
-            throw new EntityNotFoundException("Recuso não encontrado. Id: " + id);
+            throw new ResurceNotFundException("Recuso não encontrado. Id: " + id);
         }
 
         repository.deleteById(id);
